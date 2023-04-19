@@ -1,11 +1,9 @@
 package andreidodu.modelmapper;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.Provider;
 
 public class App {
 
-	static Provider<Consensus> consensusProvider = req -> new Consensus();
 
 	public static void main(String[] args) {
 
