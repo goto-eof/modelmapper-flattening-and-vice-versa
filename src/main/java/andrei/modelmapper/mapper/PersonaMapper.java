@@ -1,13 +1,19 @@
-package andreidodu.modelmapper;
+package andrei.modelmapper.mapper;
 
 import org.modelmapper.ModelMapper;
 
-public class App {
+import andrei.modelmapper.dto.PersonDTO;
+import andrei.modelmapper.mapper.common.ModelMapperI;
+import andrei.modelmapper.mapper.common.ModelMapperSingleton;
+import andrei.modelmapper.model.Person;
 
+public class PersonaMapper implements ModelMapperI<Person, PersonDTO> {
 
-	public static void main(String[] args) {
+	private ModelMapper modelMapper;
 
-		ModelMapper modelMapper = new ModelMapper();
+	public PersonaMapper() {
+
+		modelMapper = ModelMapperSingleton.retrieveModelMapper();
 
 		modelMapper.typeMap(Person.class, PersonDTO.class).addMappings(mapper -> {
 			mapper.<Boolean> map(src -> src.getConsensus().isA(), PersonDTO::setA);
@@ -21,21 +27,16 @@ public class App {
 			mapper.<Boolean> map(src -> src.isC(), (db, value) -> db.getConsensus().setC(value));
 		});
 
-		modelMapper.validate();
-
-		Person db = new Person();
-		Consensus consensus = new Consensus();
-		consensus.setA(true);
-		consensus.setB(false);
-		consensus.setC(true);
-		db.setConsensus(consensus);
-
-		System.out.println(modelMapper.map(db, PersonDTO.class));
-
-		PersonDTO dto = new PersonDTO();
-		dto.setA(true);
-		dto.setB(false);
-		dto.setC(true);
-		System.out.println(modelMapper.map(dto, Person.class));
 	}
+
+	@Override
+	public Person toDB(PersonDTO dto) {
+		return this.modelMapper.map(dto, Person.class);
+	}
+
+	@Override
+	public PersonDTO toDTO(Person db) {
+		return this.modelMapper.map(db, PersonDTO.class);
+	}
+
 }

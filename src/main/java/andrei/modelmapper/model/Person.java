@@ -1,4 +1,4 @@
-package andreidodu.modelmapper;
+package andrei.modelmapper.model;
 
 public class Person {
 

@@ -1,6 +1,7 @@
-package andreidodu.modelmapper;
+package andrei.modelmapper.model;
 
-public class PersonDTO {
+
+public class Consensus {
 
 	private boolean a;
 	private boolean b;
@@ -32,12 +33,8 @@ public class PersonDTO {
 
 	@Override
 	public String toString() {
-		return "PersonDTO [a=" + a + ", b=" + b + ", c=" + c + "]";
+		return "Consensus [a=" + a + ", b=" + b + ", c=" + c + "]";
 	}
-
-
-
-
 
 
 
